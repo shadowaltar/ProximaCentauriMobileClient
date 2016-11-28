@@ -3,6 +3,7 @@ package com.ageofaquarius.proximacentauri.infra;
 import com.ageofaquarius.proximacentauri.gaming.entity.Unit;
 import com.ageofaquarius.proximacentauri.gaming.environment.Map;
 import com.ageofaquarius.proximacentauri.gaming.environment.MapType;
+import com.ageofaquarius.proximacentauri.gaming.faction.Faction;
 
 import java.util.Set;
 
@@ -12,14 +13,9 @@ import java.util.Set;
 
 public class Game {
 
-    public static Game startNewGame() {
-        Game game = new Game();
-        return game;
-    }
 
-    public static Game loadGame(){
-
-    }
+    private Faction currentActiveFaction;
+    private Set<Unit> units;
 
     public Map initializeMap(MapType mapType, int width, int height) {
         Map map = new Map();
@@ -37,6 +33,31 @@ public class Game {
     }
 
     public void placeUnits(Map map, Set<Unit> units){
+
+    }
+
+    public boolean nextRound() {
+        return false;
+    }
+
+    public Faction getCurrentActiveFaction() {
+        
+        return currentActiveFaction;
+    }
+
+    public boolean roundComplete() {
+        return false;
+    }
+
+    public void performEnvironmentalActions() {
+        
+    }
+
+    public void letComputerPerform(Faction currentPlayer) {
+
+    }
+
+    public void calculateEndGame() {
 
     }
 }

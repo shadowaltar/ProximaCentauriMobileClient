@@ -8,4 +8,12 @@ import com.ageofaquarius.proximacentauri.gaming.environment.Coordinate;
 
 public abstract class City extends Entity
         implements Controllable, SupportiveMapObject {
+
+    public class CityUpgradeState{
+        private int populationRequirement;
+    }
+
+    private int settlementStateRounds;
+    private int passedSettlementStateRounds;
+
 }

@@ -65,4 +65,8 @@ public interface Faction {
     boolean isInTerritory(Unit unit);
 
     boolean isOwned(Unit unit);
+
+    boolean isPlayer();
+
+    boolean isComputer();
 }
