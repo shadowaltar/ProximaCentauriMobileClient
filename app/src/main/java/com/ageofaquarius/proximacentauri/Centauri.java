@@ -3,6 +3,7 @@ package com.ageofaquarius.proximacentauri;
 import com.ageofaquarius.proximacentauri.gaming.faction.Faction;
 import com.ageofaquarius.proximacentauri.infra.Game;
 import com.ageofaquarius.proximacentauri.infra.GameFactory;
+import com.ageofaquarius.proximacentauri.infra.Player;
 import com.ageofaquarius.proximacentauri.infra.RoundStatus;
 
 import java.util.List;
@@ -37,19 +38,12 @@ public class Centauri {
     private static void start(Game game) {
         ROUND:
         while (game.nextRound()) {
-            Faction currentPlayer = game.getCurrentActiveFaction();
-            if (currentPlayer.isPlayer()) {
-                while (!game.roundComplete()) {
-                    RoundStatus status = GameUI.letUserPerform(game);
-                    if (status != RoundStatus.NORMAL) {
-                        break ROUND;
-                    }
-                }
-            } else if (currentPlayer.isComputer()) {
-                game.letComputerPerform(currentPlayer);
+            while (game.hasNextPlayer()) {
+                Player player = game.nextPlayer();
+                game.runFactionPhrase(player);
             }
-
-            game.performEnvironmentalActions();
+            if (game.hasNextRound())
+                game.runPlanetPhrase();
         }
 
         game.calculateEndGame();
