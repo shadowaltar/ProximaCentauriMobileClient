@@ -10,6 +10,7 @@ import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Unit include troops, map structures/terraforming objects, and cities.
@@ -58,7 +59,7 @@ public abstract class Unit extends Entity
     }
 
     @Override
-    public List<RealmType> getAllowedRealms() {
+    public Set<RealmType> getAllowedRealms() {
         return null;
     }
 

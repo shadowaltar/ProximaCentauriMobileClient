@@ -4,6 +4,7 @@ import com.ageofaquarius.proximacentauri.gaming.entity.Entity;
 import com.ageofaquarius.proximacentauri.gaming.entity.HasCost;
 
 import java.util.Dictionary;
+import java.util.Set;
 
 /**
  * Created by Mars on 2016-11-19.
@@ -20,4 +21,10 @@ public class Technology extends Entity implements HasCost {
     public double getCost(String resourceName) {
         return 0;
     }
+
+    private TechType type;
+
+    private int level;
+
+    private Set<Technology> prerequisites;
 }

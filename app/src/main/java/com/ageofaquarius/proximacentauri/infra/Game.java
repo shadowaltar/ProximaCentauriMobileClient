@@ -73,23 +73,7 @@ public class Game {
         return currentPlayer.getFaction();
     }
 
-    public boolean roundComplete() {
-        return false;
-    }
-
-    public void performEnvironmentalActions() {
-
-    }
-
-    public void letComputerPerform(Faction currentPlayer) {
-
-    }
-
     public void calculateEndGame() {
-
-    }
-
-    public void runFactionPhrase(Player player) {
 
     }
 
@@ -117,5 +101,9 @@ public class Game {
     }
 
     public void runPlanetPhrase() {
+    }
+
+    public void runFactionPhrase(Player player) {
+
     }
 }
