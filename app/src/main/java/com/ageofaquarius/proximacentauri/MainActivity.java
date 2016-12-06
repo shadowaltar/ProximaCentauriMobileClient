@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (supportsOpenGlEs2()) {
             glSurfaceView.setEGLContextClientVersion(2);
-            glSurfaceView.setRenderer(new CentauriRenderer());
+            glSurfaceView.setRenderer(new TerrainRenderer(this));
             rendererSet = true;
             setContentView(glSurfaceView);
         } else {
