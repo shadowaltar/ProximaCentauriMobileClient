@@ -7,4 +7,5 @@ package com.ageofaquarius.proximacentauri.misc;
 public class Utilities {
     public static final int FLOAT_BYTES = 4;
     public static final int SHORT_BYTES = 2;
+    public static final int COORDINATE_DIMENSION = 3;
 }

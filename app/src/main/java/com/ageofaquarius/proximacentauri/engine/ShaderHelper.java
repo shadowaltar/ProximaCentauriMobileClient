@@ -24,6 +24,7 @@ import static android.opengl.GLES20.glValidateProgram;
  * Created by Mars on 2016-12-06.
  */
 
+@Deprecated
 public class ShaderHelper {
     private static final String TAG = "ShaderHelper";
 
