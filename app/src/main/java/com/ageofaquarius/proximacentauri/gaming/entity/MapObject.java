@@ -1,6 +1,6 @@
 package com.ageofaquarius.proximacentauri.gaming.entity;
 
-import com.ageofaquarius.proximacentauri.gaming.entity.addon.Addon;
+import com.ageofaquarius.proximacentauri.gaming.entity.capabilities.Capability;
 import com.ageofaquarius.proximacentauri.gaming.environment.Coordinate;
 import com.ageofaquarius.proximacentauri.gaming.environment.RealmType;
 import com.ageofaquarius.proximacentauri.gaming.faction.Faction;
@@ -31,21 +31,6 @@ public interface MapObject {
     String getLayer();
 
     void setLayer(String layer);
-
-    // entity movement
-
-    boolean isMovable();
-
-    void setMovable(boolean movable);
-
-    double getMovementPoint();
-
-    void setMovementPoint(double movementPoint);
-
-    int getMovementResetPerTurn();
-
-    void setMovementResetPerTurn(int turns);
-
     // entity sight
 
     int getSightRadius();
@@ -85,7 +70,7 @@ public interface MapObject {
     void setOccupiable(boolean occupiable);
 
     // entity functionality
-    Map<String, Addon> getAddons();
+    Map<String, Capability> getCapabilities();
 
 }
 

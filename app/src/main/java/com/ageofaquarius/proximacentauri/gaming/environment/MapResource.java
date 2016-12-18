@@ -2,7 +2,7 @@ package com.ageofaquarius.proximacentauri.gaming.environment;
 
 import com.ageofaquarius.proximacentauri.gaming.entity.Contour;
 import com.ageofaquarius.proximacentauri.gaming.entity.MapObject;
-import com.ageofaquarius.proximacentauri.gaming.entity.addon.Addon;
+import com.ageofaquarius.proximacentauri.gaming.entity.components.Addon;
 import com.ageofaquarius.proximacentauri.gaming.faction.Faction;
 
 import java.util.*;

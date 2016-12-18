@@ -1,7 +1,11 @@
 package com.ageofaquarius.proximacentauri.gaming.entity;
 
-import com.ageofaquarius.proximacentauri.gaming.entity.ability.Transporting;
-import com.ageofaquarius.proximacentauri.gaming.entity.addon.Addon;
+import com.ageofaquarius.proximacentauri.gaming.entity.capabilities.Transporting;
+import com.ageofaquarius.proximacentauri.gaming.entity.components.Addon;
+import com.ageofaquarius.proximacentauri.gaming.entity.components.Armor;
+import com.ageofaquarius.proximacentauri.gaming.entity.components.Chassis;
+import com.ageofaquarius.proximacentauri.gaming.entity.components.Engine;
+import com.ageofaquarius.proximacentauri.gaming.entity.components.Weapon;
 import com.ageofaquarius.proximacentauri.gaming.environment.Coordinate;
 import com.ageofaquarius.proximacentauri.gaming.environment.RealmType;
 import com.ageofaquarius.proximacentauri.gaming.faction.Faction;

@@ -41,6 +41,8 @@ public class TerrainRenderer implements GLSurfaceView.Renderer {
     private final float[] mViewMatrix = new float[16];
 
     private Hexagon hex;
+//    private GradientHexagon hex;
+//    private Triangle triangle;
 
     public TerrainRenderer(Context context) {
         this.context = context;
@@ -49,9 +51,11 @@ public class TerrainRenderer implements GLSurfaceView.Renderer {
 
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        GLES20.glClearColor(0f, 0f, 0f, 1.0f);
 
         hex = new Hexagon(context);
+//        hex = new GradientHexagon(context);
+//        triangle = new Triangle(context);
     }
 
 
@@ -60,7 +64,6 @@ public class TerrainRenderer implements GLSurfaceView.Renderer {
         GLES20.glViewport(0, 0, width, height);
         float ratio = (float) width / height;
         Matrix.frustumM(mProjectionMatrix, 0, -ratio, ratio, -1, 1, 3, 7);
-
     }
 
     @Override
@@ -69,6 +72,6 @@ public class TerrainRenderer implements GLSurfaceView.Renderer {
         Matrix.setLookAtM(mViewMatrix, 0, 0, 0, -3, 0f, 0f, 0f, 0f, 1.0f, 0.0f);
         Matrix.multiplyMM(mMVPMatrix, 0, mProjectionMatrix, 0, mViewMatrix, 0);
         hex.draw(mMVPMatrix);
-
+//        triangle.draw(mMVPMatrix);
     }
 }

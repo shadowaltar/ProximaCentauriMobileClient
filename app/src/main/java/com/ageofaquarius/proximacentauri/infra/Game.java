@@ -2,7 +2,7 @@ package com.ageofaquarius.proximacentauri.infra;
 
 import com.ageofaquarius.proximacentauri.gaming.Planet;
 import com.ageofaquarius.proximacentauri.gaming.entity.Unit;
-import com.ageofaquarius.proximacentauri.gaming.environment.Map;
+import com.ageofaquarius.proximacentauri.gaming.Map;
 import com.ageofaquarius.proximacentauri.gaming.environment.MapType;
 import com.ageofaquarius.proximacentauri.gaming.faction.Faction;
 

@@ -6,14 +6,14 @@ import android.content.pm.ConfigurationInfo;
 import android.opengl.GLES20;
 import android.os.Build;
 
-import com.ageofaquarius.proximacentauri.R;
-
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 
+import static com.ageofaquarius.proximacentauri.misc.Utilities.COORDINATE_DIMENSION;
 import static com.ageofaquarius.proximacentauri.misc.Utilities.FLOAT_BYTES;
+import static com.ageofaquarius.proximacentauri.misc.Utilities.VERTEX_STRIDE;
 
 /**
  * Created by Mars on 2016-12-11.
@@ -68,5 +68,42 @@ public class OpenGLHelper {
         data.put(values);
         data.position(0);
         return data;
+    }
+
+    public static void drawTriangle() {
+
+    }
+
+    public static int startProgram(int program) {
+        // Add program to OpenGL ES environment
+        GLES20.glUseProgram(program);
+        int positionHandle = GLES20.glGetAttribLocation(program, "vPosition");
+        GLES20.glEnableVertexAttribArray(positionHandle);
+        return positionHandle;
+    }
+
+    public static int setColor(int program, float[] color) {
+        int colorHandle = GLES20.glGetUniformLocation(program, "vColor");
+        GLES20.glUniform4fv(colorHandle, 1, color, 0);
+        return colorHandle;
+    }
+
+    public static int setViewportMatrix(int program, float[] mvpMatrix) {
+        int mvpMatrixHandle = GLES20.glGetUniformLocation(program, "uMVPMatrix");
+        GLES20.glUniformMatrix4fv(mvpMatrixHandle, 1, false, mvpMatrix, 0);
+        return mvpMatrixHandle;
+    }
+
+    public static void setVertexes(int programHandle, FloatBuffer vertexBuffer) {
+        GLES20.glVertexAttribPointer(programHandle, COORDINATE_DIMENSION, GLES20.GL_FLOAT, false, VERTEX_STRIDE, vertexBuffer);
+    }
+
+    public static void draw(int programHandle, FloatBuffer vertexBuffer, int drawVertexCount, ShortBuffer drawListBuffer) {
+        setVertexes(programHandle, vertexBuffer);
+        GLES20.glDrawElements(GLES20.GL_TRIANGLE_FAN, drawVertexCount, GLES20.GL_UNSIGNED_SHORT, drawListBuffer);
+    }
+
+    public static void stopProgram(int programHandle) {
+        GLES20.glDisableVertexAttribArray(programHandle);
     }
 }

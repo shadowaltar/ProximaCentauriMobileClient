@@ -4,7 +4,7 @@ import com.ageofaquarius.proximacentauri.gaming.Action;
 import com.ageofaquarius.proximacentauri.gaming.entity.MapObject;
 import com.ageofaquarius.proximacentauri.gaming.entity.Unit;
 import com.ageofaquarius.proximacentauri.gaming.entity.Zone;
-import com.ageofaquarius.proximacentauri.gaming.entity.ability.PatrolRoute;
+import com.ageofaquarius.proximacentauri.gaming.entity.capabilities.utils.PatrolRoute;
 import com.ageofaquarius.proximacentauri.gaming.environment.Coordinate;
 
 import java.util.List;
