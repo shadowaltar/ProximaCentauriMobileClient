@@ -9,8 +9,8 @@ import java.util.Set;
  */
 
 public class Patrolling extends Capability {
-    public Patrolling(MovementEnabled movementEnabled) {
-        dependingOn = movementEnabled;
+    public Patrolling(CanMove canMove) {
+        dependingOn = canMove;
     }
 
     private Set<EntityAction> allowedActions;

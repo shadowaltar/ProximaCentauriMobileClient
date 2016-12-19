@@ -1,6 +1,6 @@
 package com.ageofaquarius.proximacentauri.gaming.entity.capabilities;
 
-import com.ageofaquarius.proximacentauri.gaming.behavior.ExperienceFormula;
+import com.ageofaquarius.proximacentauri.mechanism.ExperienceFormula;
 import com.ageofaquarius.proximacentauri.gaming.entity.capabilities.utils.ExperienceGainingType;
 
 /**

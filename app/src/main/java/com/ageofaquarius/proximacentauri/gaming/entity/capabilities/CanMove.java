@@ -7,8 +7,6 @@ import com.ageofaquarius.proximacentauri.gaming.environment.Realm;
  */
 
 public class CanMove extends Capability {
-
-    private boolean isMovementPointRecoverable;
     private Realm realm;
     private double maxMovementPoints;
     private double currentMovementPoints;

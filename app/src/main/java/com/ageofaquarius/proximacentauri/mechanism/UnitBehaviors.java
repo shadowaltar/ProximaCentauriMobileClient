@@ -1,6 +1,6 @@
-package com.ageofaquarius.proximacentauri.gaming.behavior;
+package com.ageofaquarius.proximacentauri.mechanism;
 
-import com.ageofaquarius.proximacentauri.gaming.Action;
+import com.ageofaquarius.proximacentauri.gaming.actions.Action;
 import com.ageofaquarius.proximacentauri.gaming.entity.MapObject;
 import com.ageofaquarius.proximacentauri.gaming.entity.Unit;
 import com.ageofaquarius.proximacentauri.gaming.entity.Zone;

@@ -1,5 +1,7 @@
 package com.ageofaquarius.proximacentauri.gaming.entity.capabilities;
 
+import com.ageofaquarius.proximacentauri.gaming.entity.MapObject;
+
 import java.util.Set;
 
 /**
@@ -8,4 +10,5 @@ import java.util.Set;
 
 public class GarrisonEnabled extends Capability {
     private Set<Capability> garrisonAbilities;
+    private MapObject primaryGuard;
 }

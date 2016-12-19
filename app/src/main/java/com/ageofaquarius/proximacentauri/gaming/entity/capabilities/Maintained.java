@@ -1,6 +1,6 @@
 package com.ageofaquarius.proximacentauri.gaming.entity.capabilities;
 
-import com.ageofaquarius.proximacentauri.gaming.entity.Resource;
+import com.ageofaquarius.proximacentauri.gaming.entity.Resources;
 import com.ageofaquarius.proximacentauri.gaming.entity.capabilities.utils.MaintenanceType;
 
 /**
@@ -8,6 +8,6 @@ import com.ageofaquarius.proximacentauri.gaming.entity.capabilities.utils.Mainte
  */
 
 public class Maintained extends Capability {
-    private Resource[] maintenanceResources;
+    private Resources maintenanceResources;
     private MaintenanceType type;
 }

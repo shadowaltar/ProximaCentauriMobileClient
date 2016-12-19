@@ -1,5 +1,6 @@
 package com.ageofaquarius.proximacentauri.gaming.entity.capabilities;
 
+import com.ageofaquarius.proximacentauri.gaming.entity.MapObject;
 import com.ageofaquarius.proximacentauri.gaming.entity.Resource;
 
 import java.util.HashSet;
@@ -10,4 +11,6 @@ import java.util.HashSet;
 
 public class ResourceGathering extends Capability {
     private HashSet<Resource> allowedResources;
+    private HashSet<Resource> currentGatheringResources;
+    private MapObject repository;
 }

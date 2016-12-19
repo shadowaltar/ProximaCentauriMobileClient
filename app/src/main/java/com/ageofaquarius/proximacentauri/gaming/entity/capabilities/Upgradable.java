@@ -1,6 +1,7 @@
 package com.ageofaquarius.proximacentauri.gaming.entity.capabilities;
 
 import com.ageofaquarius.proximacentauri.gaming.entity.MapObject;
+import com.ageofaquarius.proximacentauri.gaming.entity.Resources;
 
 import java.util.HashMap;
 import java.util.HashSet;

@@ -1,4 +1,4 @@
-package com.ageofaquarius.proximacentauri.gaming.behavior;
+package com.ageofaquarius.proximacentauri.mechanism;
 
 /**
  * Created by Mars on 2016-12-19.

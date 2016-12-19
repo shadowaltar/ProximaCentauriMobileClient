@@ -1,6 +1,6 @@
 package com.ageofaquarius.proximacentauri.gaming.entity.capabilities;
 
-import com.ageofaquarius.proximacentauri.gaming.Action;
+import com.ageofaquarius.proximacentauri.gaming.actions.Action;
 import com.ageofaquarius.proximacentauri.gaming.entity.capabilities.utils.EspionageActionType;
 
 /**

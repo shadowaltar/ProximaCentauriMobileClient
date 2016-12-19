@@ -5,5 +5,5 @@ package com.ageofaquarius.proximacentauri.gaming.entity.capabilities;
  */
 
 public class Vampiric extends Capability {
-
+    private double conversionRate;
 }

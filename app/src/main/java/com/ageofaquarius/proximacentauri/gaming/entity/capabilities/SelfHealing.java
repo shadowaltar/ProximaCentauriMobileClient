@@ -5,8 +5,8 @@ package com.ageofaquarius.proximacentauri.gaming.entity.capabilities;
  */
 
 public class SelfHealing extends Capability {
-    public SelfHealing(EnduranceEnabled enduranceEnabled) {
-        dependingOn = enduranceEnabled;
+    public SelfHealing(HaveEndurance haveEndurance) {
+        dependingOn = haveEndurance;
     }
 
     private double percentageHealingRate;
