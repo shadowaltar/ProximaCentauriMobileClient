@@ -1,4 +1,4 @@
-package com.ageofaquarius.proximacentauri.gaming.faction;
+package com.ageofaquarius.proximacentauri.gaming.governing.diplomacies;
 
 /**
  * Created by Mars on 2016-11-18.
