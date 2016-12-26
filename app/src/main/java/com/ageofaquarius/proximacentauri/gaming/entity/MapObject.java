@@ -14,64 +14,14 @@ import java.util.Set;
 
 public interface MapObject {
 
-    // positioning and size attributes
-
     Coordinate getCoordinate();
-
     RealmType getCurrentRealm();
-
     Set<RealmType> getAllowedRealms();
 
-    int getSize();
-
-    Contour getContour();
-
-    // rendering attributes
-
     String getLayer();
-
     void setLayer(String layer);
-    // entity sight
 
-    int getSightRadius();
-
-    void setSightRadius(int sightRadius);
-
-    // entity zoc
-
-    int getZoneOfControlRadius();
-
-    void setZoneOfControlRadius(int zoneOfControlRadius);
-
-    // entity action point
-
-    double getActionPoint();
-
-    void setActionPoint(double actionPoint);
-
-    int getActionResetPerTurn();
-
-    void setActionResetPerTurn(int turns);
-
-    // entity lifespan
-
-    int getLifeSpan();
-
-    void setLifeSpan(int turns);
-
-    // entity ownership
-
-    Faction getOwner();
-
-    void setOwner(Faction faction);
-    
-    boolean isOccupiable();
-    
-    void setOccupiable(boolean occupiable);
-
-    // entity functionality
     Map<String, Capability> getCapabilities();
-
 }
 
 

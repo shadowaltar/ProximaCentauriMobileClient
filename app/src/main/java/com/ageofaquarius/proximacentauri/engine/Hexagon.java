@@ -8,8 +8,8 @@ import com.ageofaquarius.proximacentauri.R;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 
-import static com.ageofaquarius.proximacentauri.misc.Utilities.COORDINATE_DIMENSION;
-import static com.ageofaquarius.proximacentauri.misc.Utilities.VERTEX_STRIDE;
+import static com.ageofaquarius.proximacentauri.util.Utilities.COORDINATE_DIMENSION;
+import static com.ageofaquarius.proximacentauri.util.Utilities.VERTEX_STRIDE;
 
 /**
  * Created by Mars on 2016-12-11.

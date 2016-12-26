@@ -1,4 +1,4 @@
-package com.ageofaquarius.proximacentauri.utility;
+package com.ageofaquarius.proximacentauri.util;
 
 import java.lang.reflect.Method;
 

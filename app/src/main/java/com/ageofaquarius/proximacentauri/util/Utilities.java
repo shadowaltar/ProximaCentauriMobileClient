@@ -1,4 +1,4 @@
-package com.ageofaquarius.proximacentauri.misc;
+package com.ageofaquarius.proximacentauri.util;
 
 /**
  * Created by Mars on 2016-12-04.

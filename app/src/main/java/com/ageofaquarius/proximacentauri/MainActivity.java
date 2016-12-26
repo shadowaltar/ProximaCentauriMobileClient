@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        ServiceLocator.setAppContext(getApplicationContext());
         surfaceView = new TerrainSurfaceView(this);
         if (OpenGLHelper.supportsOpenGlEs2(this)) {
             setContentView(surfaceView);

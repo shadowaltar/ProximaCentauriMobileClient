@@ -13,8 +13,6 @@ public abstract class Entity {
 
     private String name;
     private String displayName;
-    private List<String> groupNames = new ArrayList<>();
-    private List<Technology> technologyPrerequisites = new ArrayList<>();
 
     public String getName() {
         return name;
@@ -30,13 +28,5 @@ public abstract class Entity {
 
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
-    }
-
-    public List<String> getGroupNames() {
-        return groupNames;
-    }
-
-    public List<Technology> getTechnologyPrerequisites() {
-        return technologyPrerequisites;
     }
 }

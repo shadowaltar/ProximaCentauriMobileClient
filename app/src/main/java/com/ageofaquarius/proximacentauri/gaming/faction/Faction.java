@@ -4,7 +4,6 @@ import com.ageofaquarius.proximacentauri.gaming.entity.City;
 import com.ageofaquarius.proximacentauri.gaming.entity.Structure;
 import com.ageofaquarius.proximacentauri.gaming.entity.Unit;
 import com.ageofaquarius.proximacentauri.gaming.governing.Diplomacy;
-import com.ageofaquarius.proximacentauri.gaming.governing.SocietyPolicy;
 import com.ageofaquarius.proximacentauri.gaming.tech.Research;
 import com.ageofaquarius.proximacentauri.gaming.tech.ResearchConstraint;
 
@@ -41,8 +40,6 @@ public interface Faction {
     List<SocietyModifier> getCurrentSocietyModifier();
 
     List<SocietyModifier> getInnateSocietyModifier();
-
-    List<SocietyPolicy> getCurrentSocietyPolicy();
 
     int getPopulation();
 

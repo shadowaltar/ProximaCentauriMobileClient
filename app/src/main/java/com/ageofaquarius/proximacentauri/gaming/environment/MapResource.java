@@ -1,12 +1,11 @@
 package com.ageofaquarius.proximacentauri.gaming.environment;
 
-import com.ageofaquarius.proximacentauri.gaming.entity.Contour;
 import com.ageofaquarius.proximacentauri.gaming.entity.MapObject;
-import com.ageofaquarius.proximacentauri.gaming.entity.components.Addon;
-import com.ageofaquarius.proximacentauri.gaming.faction.Faction;
+import com.ageofaquarius.proximacentauri.gaming.entity.Resource;
+import com.ageofaquarius.proximacentauri.gaming.entity.capabilities.Capability;
 
-import java.util.*;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by Mars on 2016-11-18.
@@ -15,7 +14,7 @@ import java.util.Map;
 public class MapResource implements MapObject {
 
     private Coordinate coordinate;
-    public String resourceType;
+    private Resource resource;
 
     @Override
     public Coordinate getCoordinate() {
@@ -33,127 +32,15 @@ public class MapResource implements MapObject {
     }
 
     @Override
-    public int getSize() {
-        return 0;
-    }
-
-    @Override
-    public Contour getContour() {
-        return null;
-    }
-
-    @Override
     public String getLayer() {
         return null;
     }
 
     @Override
     public void setLayer(String layer) {
-
     }
-
     @Override
-    public boolean isMovable() {
-        return false;
-    }
-
-    @Override
-    public void setMovable(boolean movable) {
-
-    }
-
-    @Override
-    public double getMovementPoint() {
-        return 0;
-    }
-
-    @Override
-    public void setMovementPoint(double movementPoint) {
-
-    }
-
-    @Override
-    public int getMovementResetPerTurn() {
-        return 0;
-    }
-
-    @Override
-    public void setMovementResetPerTurn(int turns) {
-
-    }
-
-    @Override
-    public int getSightRadius() {
-        return 0;
-    }
-
-    @Override
-    public void setSightRadius(int sightRadius) {
-
-    }
-
-    @Override
-    public int getZoneOfControlRadius() {
-        return 0;
-    }
-
-    @Override
-    public void setZoneOfControlRadius(int zoneOfControlRadius) {
-
-    }
-
-    @Override
-    public double getActionPoint() {
-        return 0;
-    }
-
-    @Override
-    public void setActionPoint(double actionPoint) {
-
-    }
-
-    @Override
-    public int getActionResetPerTurn() {
-        return 0;
-    }
-
-    @Override
-    public void setActionResetPerTurn(int turns) {
-
-    }
-
-    @Override
-    public int getLifeSpan() {
-        return 0;
-    }
-
-    @Override
-    public void setLifeSpan(int turns) {
-
-    }
-
-    @Override
-    public Faction getOwner() {
-        return null;
-    }
-
-    @Override
-    public void setOwner(Faction faction) {
-
-    }
-
-    @Override
-    public boolean isOccupiable() {
-        return false;
-    }
-
-    @Override
-    public void setOccupiable(boolean occupiable) {
-
-    }
-
-    @Override
-    public Map<String, Addon> getAddons() {
+    public Map<String, Capability> getCapabilities() {
         return null;
     }
 }
