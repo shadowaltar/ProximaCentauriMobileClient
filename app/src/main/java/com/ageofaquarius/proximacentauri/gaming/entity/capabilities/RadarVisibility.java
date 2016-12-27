@@ -8,7 +8,7 @@ import java.util.HashSet;
  * Created by Mars on 2016-12-18.
  */
 
-public class MinimapVisibility extends Capability {
+public class RadarVisibility extends Capability {
     private boolean isVisible;
     private HashSet<RealmVisibility> visibilities;
 }

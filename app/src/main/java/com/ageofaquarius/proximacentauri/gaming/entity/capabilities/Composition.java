@@ -2,6 +2,8 @@ package com.ageofaquarius.proximacentauri.gaming.entity.capabilities;
 
 import com.ageofaquarius.proximacentauri.gaming.entity.components.Component;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -9,5 +11,6 @@ import java.util.List;
  */
 
 public class Composition extends Capability {
-    private List<Component> components;
+    private HashSet<String> allowedComponentTypes;
+    private ArrayList<Component> currentComponents;
 }

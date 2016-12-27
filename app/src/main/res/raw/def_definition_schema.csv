@@ -1,0 +1,3 @@
+ResourceType,HEADER,NAME,DISPLAY_NAME
+ResourceType,TYPE,STRING,STRING
+ResourceType,FIELD,Name,DisplayName

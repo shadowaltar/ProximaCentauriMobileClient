@@ -6,6 +6,10 @@ import android.widget.Toast;
 
 import com.ageofaquarius.proximacentauri.engine.OpenGLHelper;
 import com.ageofaquarius.proximacentauri.engine.TerrainSurfaceView;
+import com.ageofaquarius.proximacentauri.gaming.entity.ResourceType;
+import com.ageofaquarius.proximacentauri.infra.DefinitionSchemas;
+import com.ageofaquarius.proximacentauri.infra.Definitions;
+import com.ageofaquarius.proximacentauri.util.FileAccess;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,6 +28,12 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "This device doesn't support OpenGL ES 2.0.", Toast.LENGTH_LONG).show();
             return;
         }
+
+        // loading game definitions
+        DefinitionSchemas definitionSchemas = DefinitionSchemas.getInstance();
+        definitionSchemas.initialize();
+        Definitions definitions = new Definitions();
+        definitions.load(definitionSchemas);
     }
 
     @Override

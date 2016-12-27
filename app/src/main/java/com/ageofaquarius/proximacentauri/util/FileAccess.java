@@ -5,16 +5,17 @@ import android.content.res.Resources;
 import android.os.Environment;
 import android.util.Log;
 
-import com.ageofaquarius.proximacentauri.R;
 import com.ageofaquarius.proximacentauri.ServiceLocator;
 import com.ageofaquarius.proximacentauri.infra.DefinitionSchemaException;
+import com.ageofaquarius.proximacentauri.infra.DefinitionSchemas;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 /**
@@ -52,84 +53,11 @@ public class FileAccess {
         return file;
     }
 
-    public static <T> ArrayList<T> construct(Class definitionClass,
-                                             String[][] data,
-                                             String[][] colDefinitions) {
-        ArrayList<T> results = new ArrayList<T>();
-        try {
-            if (colDefinitions.length != 2 || colDefinitions[0].length < 1
-                    || !colDefinitions[0][0].equals("NAME") || !colDefinitions[1][0].equals("STRING"))
-                // must be two sets of strings: 1st is col name, 2nd is col type.
-                // 1st column must be NAME (STRING).
-                throw new DefinitionSchemaException();
-
-            int colCount = colDefinitions[0].length;
-            for (String[] row : data) {
-                Object result;
-                for (int i = 1; i < colCount; i++) {
-                    result = definitionClass.newInstance();
-
-                    String value = row[i];
-                    String key = colDefinitions[0][i];
-                    String typeHint = colDefinitions[1][i];
-
-                    Field field = definitionClass.getField(key);
-                    switch (typeHint) {
-                        case "STRING":
-                            field.set(result, value);
-                            break;
-                        case "INTEGER":
-                            field.setInt(result, Integer.parseInt(value));
-                            break;
-                        case "DOUBLE":
-                            field.setDouble(result, Double.parseDouble(value));
-                            break;
-                        case "BOOLEAN":
-                            field.setBoolean(result, Boolean.parseBoolean(value));
-                            break;
-                        case "INTEGERS":
-                            String[] intStrings = value.split(",");
-                            int[] intResults = new int[intStrings.length];
-                            for (int j = 0; j < intStrings.length; j++)
-                                intResults[j] = Integer.parseInt(intStrings[j]);
-                            field.set(result, intResults);
-                            break;
-                        case "DOUBLES":
-                            String[] doubleStrings = value.split(",");
-                            int[] doubleResults = new int[doubleStrings.length];
-                            for (int j = 0; j < doubleStrings.length; j++)
-                                doubleResults[j] = Integer.parseInt(doubleStrings[j]);
-                            field.set(result, doubleResults);
-                            break;
-                        case "STRINGS":
-                            String[] strings = value.split(",");
-                            field.set(result, strings);
-                            break;
-                        default:
-                            field.set(result, value);
-                            break;
-                    }
-                    results.add((T) result);
-                }
-            }
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (DefinitionSchemaException e) {
-            e.printStackTrace();
-        }
-        return results;
-    }
-
-    public static String[][] readRawDefinitions(Class definitionClass) {
-        Context context = ServiceLocator.getAppContext();
-        ArrayList<String> fileContents = readTextFileFromResource(context, R.raw.def_resources);
-        String[][] results = new String[fileContents.size()][];
-        for (int i = 0; i < fileContents.size(); i++){
-            results[i] = fileContents.get(i).split(",");
+    public static ArrayList<String[]> readTextFileAsArray(Context context, int key) {
+        ArrayList<String> fileContents = readTextFileFromResource(context, key);
+        ArrayList<String[]> results = new ArrayList<>();
+        for (int i = 0; i < fileContents.size(); i++) {
+            results.add(fileContents.get(i).split(","));
         }
         return results;
     }
