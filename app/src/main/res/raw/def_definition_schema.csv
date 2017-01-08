@@ -1,3 +1,136 @@
-ResourceType,HEADER,NAME,DISPLAY_NAME
-ResourceType,TYPE,STRING,STRING
-ResourceType,FIELD,Name,DisplayName
+"SCHEMAS" : [
+{
+    "TYPE" : "ResourceType",
+    "GLOBAL" : true,
+    "COLUMNS" : [
+        {"header":"NAME", "type":"STRING", "fieldName":"Name"},
+        {"header":"DISPLAY_NAME", "type":"STRING", "fieldName":"DisplayName"},
+    ]
+},
+{
+    "TYPE" : "Realm",
+    "GLOBAL" : true,
+    "COLUMNS" : [
+        {"header":"NAME", "type":"STRING", "fieldName":"Name"},
+        {"header":"DISPLAY_NAME", "type":"STRING", "fieldName":"DisplayName"},
+        {"header":"LAYER_INDEX", "type":"INTEGER", "fieldName":"LayerIndex"},
+    ]
+},
+{
+    "TYPE" : "TileCondition",
+    "GLOBAL" : true,
+    "COLUMNS" : [
+        {"header":"NAME", "type":"STRING", "fieldName":"Name"},
+        {"header":"DISPLAY_NAME", "type":"STRING", "fieldName":"DisplayName"},
+        {"header":"RESOURCE_TYPE", "type":"STRING", "fieldName":"ResourceType"},
+        {"header":"RESOURCE_AMOUNT", "type":"STRING", "fieldName":"resourceAmount"},
+        {"header":"CONDITION_CATEGORY", "type":"STRING", "fieldName":"ConditionCategory"},
+    ]
+},
+{
+    "TYPE" : "Capability",
+    "GLOBAL" : true,
+    "SPECIAL_CLASS" : true,
+    "COLUMNS" : [
+        {"header":"NAME", "type":"STRING", "fieldName":"Name"},
+        {"header":"CLASS_NAME", "type":"CLASS", "fieldName":"-"},
+        {"header":"DISPLAY_NAME", "type":"STRING", "fieldName":"DisplayName"},
+        {"header":"DESCRIPTION", "type":"STRING", "fieldName":"Description"},
+        {"header":"BASED_ON", "type":"STRINGS", "fieldName":"BasedOnCapabilities"},
+        {"header":"RESTRICTED_TO", "type":"STRINGS", "fieldName":"RestrictedToObjects"},
+        {"header":"DEFAULT_VALUES", "type":"DYNAMICS, "fieldName":"-"},
+    ]
+},
+{
+    "TYPE" : "Faction",
+    "GLOBAL" : true,
+    "COLUMNS" : [
+        {"header":"NAME", "type":"STRING", "fieldName":"Name"},
+        {"header":"DISPLAY_NAME", "type":"STRING", "fieldName":"DisplayName"},
+        {"header":"EARLY_STAGE_DISPLAY_NAME", "type":"STRING", "fieldName":"EarlyStageDisplayName"},
+        {"header":"FACTION_NICKNAME", "type":"STRING", "fieldName":"FactionNickname"},
+        {"header":"LEADER_NAME", "type":"STRING", "fieldName":"LeaderName"},
+        {"header":"LEADER_NICKNAME", "type":"STRING", "fieldName":"LeaderNickname"},
+        {"header":"CAPITAL", "type":"STRING", "fieldName":"CapitalName"},
+        {"header":"SOCIETY_TRAIT", "type":"DYNAMICS", "fieldName":"-"},
+        {"header":"MILITARY_TRAIT", "type":"DYNAMICS", "fieldName":"-"},
+        {"header":"UNIQUE_ABILITY", "type":"DYNAMICS", "fieldName":"-"},
+        {"header":"AGGRESSIVENESS", "type":"INTEGER", "fieldName":"Aggressiveness"},
+        {"header":"FAVORED_METHOD", "type":"STRINGS", "fieldName":"FavoredMethodologies"},
+        {"header":"SPECIES", "type":"STRING", "fieldName":"Species"},
+        {"header":"SPECIES_ALIAS", "type":"STRING", "fieldName":"SpeciesAlias"},
+        {"header":"GROUP", "type":"STRINGS", "fieldName":"Groups"},
+        {"header":"ADVANCED", "type":"BOOLEAN", "fieldName":"Advanced"},
+        {"header":"EVOLVABLE", "type":"BOOLEAN", "fieldName":"Evolvable"},
+        {"header":"PLAYABLE", "type":"BOOLEAN", "fieldName":"Playable"},
+        {"header":"STYLE", "type":"STRINGS", "fieldName":"Styles"},
+        {"header":"SECONDARY_STYLE", "type":"STRINGS", "fieldName":"SecondaryStyles"},
+        {"header":"COLOR_STYLE", "type":"STRINGS", "fieldName":"ColorStyles"},
+    ]
+},
+{
+    "TYPE" : "DiplomacyAction",
+    "GLOBAL" : true,
+    "COLUMNS" : []
+},
+{
+    "TYPE" : "TradingAction",
+    "GLOBAL" : true,
+    "COLUMNS" : []
+},
+{
+    "TYPE" : "GovernmentPolicy",
+    "GLOBAL" : true,
+    "COLUMNS" : []
+},
+{
+    "TYPE" : "SocietyIdeology",
+    "GLOBAL" : true,
+    "COLUMNS" : []
+},
+{
+    "TYPE" : "PoliticalSystem",
+    "GLOBAL" : true,
+    "COLUMNS" : []
+},
+{
+    "TYPE" : "City",
+    "GLOBAL" : false,
+    "PREDEFINED" : true,
+    "COLUMNS" : []
+},
+{
+    "TYPE" : "Structure",
+    "GLOBAL" : false,
+    "COLUMNS" : []
+},
+{
+    "TYPE" : "Unit",
+    "GLOBAL" : false,
+    "COLUMNS" : []
+},
+{
+    "TYPE" : "MapObject",
+    "GLOBAL" : false,
+    "SPECIAL_CLASS" : true,
+    "COLUMNS" : []
+},
+{
+    "TYPE" : "Action",
+    "GLOBAL" : false,
+    "SPECIAL_CLASS" : true,
+    "COLUMNS" : []
+},
+{
+    "TYPE" : "Component",
+    "GLOBAL" : false,
+    "SPECIAL_CLASS" : true,
+    "COLUMNS" : []
+},
+{
+    "TYPE" : "TemporaryStatus",
+    "GLOBAL" : false,
+    "SPECIAL_CLASS" : true,
+    "COLUMNS" : []
+},
+]

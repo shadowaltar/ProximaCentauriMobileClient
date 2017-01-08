@@ -3,8 +3,14 @@ package com.ageofaquarius.proximacentauri.infra;
 import com.ageofaquarius.proximacentauri.R;
 import com.ageofaquarius.proximacentauri.ServiceLocator;
 import com.ageofaquarius.proximacentauri.gaming.entity.ResourceType;
+import com.ageofaquarius.proximacentauri.gaming.entity.capabilities.Capability;
+import com.ageofaquarius.proximacentauri.gaming.faction.Faction;
 import com.ageofaquarius.proximacentauri.util.FileAccess;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -20,9 +26,11 @@ public class DefinitionSchemas {
 
     private ArrayList<Class> classes = new ArrayList<>();
     private ArrayList<String> classNames = new ArrayList<>();
-    private HashMap<String, Class> classNameToClasses = new HashMap<>();
-    private HashMap<Class, String> classToClassNames = new HashMap<>();
+    private HashMap<String, Class> defaultClasses = new HashMap<>();
     private HashMap<String, Integer> resourceKeys = new HashMap<>();
+    private HashMap<String, Field> definitionFields = new HashMap<>();
+
+    private HashMap<Class, String> classToClassNames = new HashMap<>();
 
     private HashMap<String, HashMap<String, String[]>> definitionSchemas = new HashMap<>();
 
@@ -38,33 +46,53 @@ public class DefinitionSchemas {
     }
 
     public void initialize() {
-        classNameToClasses.put("ResourceType", ResourceType.class);
-        resourceKeys.put("ResourceType", R.raw.def_resources);
+        addOneCategory("ResourceType", ResourceType.class, R.raw.def_resources, "resourceTypes");
+        addOneCategory("Capability", Capability.class, R.raw.def_object_capabilities, "capabilities");
+        addOneCategory("Faction", Faction.class, R.raw.def_factions, "factions");
 
-        for (Map.Entry<String, Class> entry : classNameToClasses.entrySet()) {
-            ArrayList<String[]> rawSchemas = FileAccess.readTextFileAsArray(ServiceLocator.getAppContext(), R.raw.def_definition_schema);
-            parseRawSchemas(rawSchemas);
+
+        for (Map.Entry<String, Class> entry : defaultClasses.entrySet()) {
+            String rawSchemas = FileAccess.readAsString(ServiceLocator.getAppContext(), R.raw.def_definition_schema);
+            parseSchemas(rawSchemas);
             classNames.add(entry.getKey());
             classes.add(entry.getValue());
             classToClassNames.put(entry.getValue(), entry.getKey());
         }
     }
 
-    private void parseRawSchemas(ArrayList<String[]> rawSchemas) {
-        for (int i = 0; i < rawSchemas.size(); i++) {
-            String[] row = rawSchemas.get(i);
-            String className = row[0];
-            String subject = row[1];
+    private void addOneCategory(String name, Class defaultClass, int definitionFileKey,
+                                String definitionFieldName) {
+        defaultClasses.put(name, defaultClass);
+        resourceKeys.put(name, definitionFileKey);
 
-            if (!definitionSchemas.containsKey(className)) {
-                HashMap<String, String[]> def = new HashMap<>();
-                definitionSchemas.put(className, def);
-            }
-
-            HashMap<String, String[]> def = definitionSchemas.get(className);
-            def.put(subject, Arrays.copyOfRange(row, 2, row.length));
-            definitionSchemas.put(className, def);
+        try {
+            Field f = Definitions.class.getDeclaredField(definitionFieldName);
+            f.setAccessible(true);
+            definitionFields.put(name, f);
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
         }
+    }
+
+    private void parseSchemas(String rawSchemas) {
+        JsonParser jsonParser = new JsonParser();
+        JsonObject jsonObject = (JsonObject) jsonParser.parse(rawSchemas);
+        JsonArray schemas = jsonObject.getAsJsonArray();
+//        for (int i = 0; i < rawSchemas.size(); i++) {
+//            String[] row = rawSchemas.get(i);
+//            String className = row[0];
+//            String subject = row[1];
+//
+//            if (!definitionSchemas.containsKey(className)) {
+//                HashMap<String, String[]> def = new HashMap<>();
+//                definitionSchemas.put(className, def);
+//            }
+//
+//            HashMap<String, String[]> def = definitionSchemas.get(className);
+//            def.put(subject, Arrays.copyOfRange(row, 2, row.length));
+//            definitionSchemas.put(className, def);
+//        }
+        System.out.println();
     }
 
     public int getResourceKey(String className) {
@@ -72,7 +100,7 @@ public class DefinitionSchemas {
     }
 
     public Class getClass(String className) {
-        return classNameToClasses.get(className);
+        return defaultClasses.get(className);
     }
 
     public HashMap<String, String[]> getSchema(String className) throws DefinitionSchemaException {

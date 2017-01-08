@@ -13,6 +13,8 @@ import com.ageofaquarius.proximacentauri.gaming.entity.Unit;
 import com.ageofaquarius.proximacentauri.gaming.entity.capabilities.Capability;
 import com.ageofaquarius.proximacentauri.gaming.entity.components.Component;
 import com.ageofaquarius.proximacentauri.gaming.entity.statuses.TemporaryStatus;
+import com.ageofaquarius.proximacentauri.gaming.environment.Realm;
+import com.ageofaquarius.proximacentauri.gaming.environment.TileCondition;
 import com.ageofaquarius.proximacentauri.gaming.faction.Faction;
 import com.ageofaquarius.proximacentauri.gaming.governing.TradingAction;
 import com.ageofaquarius.proximacentauri.gaming.governing.policies.GovernmentPolicy;
@@ -34,7 +36,10 @@ public class Definitions {
     public static final String NAME_COLUMN = "Name";
 
     private HashMap<String, ResourceType> resourceTypes = null;
-    private HashMap<String, Capability> capabilities = new HashMap<>();
+    private HashMap<String, Realm> realms = null;
+    private HashMap<String, TileCondition> tileConditions = null;
+
+    private HashMap<String, Capability> capabilities = null;
 
     private HashMap<String, Faction> factions = new HashMap<>();
     private HashMap<String, DiplomacyAction> diplomacyActions = new HashMap<>();
@@ -53,16 +58,17 @@ public class Definitions {
     private HashMap<String, Component> mapObjectComponents = new HashMap<>();
     private HashMap<String, TemporaryStatus> mapObjectStatuses = new HashMap<>();
 
+
     public void load(DefinitionSchemas schemas) {
         Context context = ServiceLocator.getAppContext();
         ArrayList<String> classNames = schemas.getClassNames();
         for (String className : classNames) {
             try {
                 int key = schemas.getResourceKey(className);
-                ArrayList<String[]> data = FileAccess.readTextFileAsArray(context, key);
+                ArrayList<String[]> data = FileAccess.readAsDelimitedLines(context, key);
                 HashMap<String, String[]> schema = schemas.getSchema(className);
                 Class theClass = schemas.getClass(className);
-                resourceTypes = construct(theClass, data, schema);
+                resourceTypes = construct(theClass, data, schema, null);
             } catch (DefinitionSchemaException e) {
                 e.printStackTrace();
             }
@@ -70,9 +76,10 @@ public class Definitions {
     }
 
 
-    public static <T> HashMap<String, T> construct(Class definitionClass,
+    public static <T> HashMap<String, T> construct(Class defaultClass,
                                                    ArrayList<String[]> data,
-                                                   HashMap<String, String[]> colDefinitions) {
+                                                   HashMap<String, String[]> colDefinitions,
+                                                   HashMap<String, Object> otherHints) {
         HashMap<String, T> results = new HashMap<>();
         try {
             if (!colDefinitions.containsKey("HEADER")
@@ -98,32 +105,34 @@ public class Definitions {
             data.remove(0);
             for (String[] row : data) {
                 String instanceName = "";
-                Object instance = definitionClass.newInstance();
+                Object instance = defaultClass.newInstance();
                 for (int i = 0; i < colCount; i++) {
                     String value = row[i];
                     String fieldName = fieldNames[i];
                     String typeHint = typeHints[i];
                     Method method;
+
                     switch (typeHint) {
                         case "STRING":
-                            method = definitionClass.getMethod("set" + fieldName, String.class);
+                            method = defaultClass.getMethod("set" + fieldName, String.class);
                             method.invoke(instance, value);
                             break;
                         case "INTEGER":
-                            method = definitionClass.getMethod("set" + fieldName, Integer.class);
+                            method = defaultClass.getMethod("set" + fieldName, Integer.class);
                             method.invoke(instance, Integer.parseInt(value));
                             break;
                         case "DOUBLE":
-                            method = definitionClass.getMethod("set" + fieldName, Double.class);
+                            method = defaultClass.getMethod("set" + fieldName, Double.class);
                             method.invoke(instance, Double.parseDouble(value));
                             break;
                         case "BOOLEAN":
-                            method = definitionClass.getMethod("set" + fieldName, Boolean.class);
+                            method = defaultClass.getMethod("set" + fieldName, Boolean.class);
                             method.invoke(instance, Boolean.parseBoolean(value));
                             break;
                         case "INTEGERS":
                             Class intArrayCls = Class.forName("[L" + Integer.class.getName() + ";");
-                            method = definitionClass.getMethod("set" + fieldName, intArrayCls);
+                            instance = defaultClass.newInstance();
+                            method = defaultClass.getMethod("set" + fieldName, intArrayCls);
                             String[] intStrings = value.split(",");
                             int[] intResults = new int[intStrings.length];
                             for (int j = 0; j < intStrings.length; j++)
@@ -132,7 +141,8 @@ public class Definitions {
                             break;
                         case "DOUBLES":
                             Class dblArrayCls = Class.forName("[L" + Double.class.getName() + ";");
-                            method = definitionClass.getMethod("set" + fieldName, dblArrayCls);
+                            instance = defaultClass.newInstance();
+                            method = defaultClass.getMethod("set" + fieldName, dblArrayCls);
                             String[] doubleStrings = value.split(",");
                             int[] doubleResults = new int[doubleStrings.length];
                             for (int j = 0; j < doubleStrings.length; j++)
@@ -141,12 +151,20 @@ public class Definitions {
                             break;
                         case "STRINGS":
                             Class strArrayCls = Class.forName("[L" + Double.class.getName() + ";");
-                            method = definitionClass.getMethod("set" + fieldName, strArrayCls);
+                            instance = defaultClass.newInstance();
+                            method = defaultClass.getMethod("set" + fieldName, strArrayCls);
                             String[] strings = value.split(",");
                             method.invoke(instance, strings);
                             break;
+                        case "CLASS":
+//                            instance = defaultClass.newInstance();
+                            break;
+                        case "DYNAMICS":
+                            dynamicInit(instance, value);
+                            break;
                         default:
-                            method = definitionClass.getMethod("set" + fieldName, Object.class);
+                            instance = defaultClass.newInstance();
+                            method = defaultClass.getMethod("set" + fieldName, Object.class);
                             method.invoke(instance, value);
                             break;
                     }
@@ -170,6 +188,10 @@ public class Definitions {
             e.printStackTrace();
         }
         return results;
+    }
+
+    private static void dynamicInit(Object instance, String value) {
+
     }
 
     public HashMap<String, ResourceType> getResourceTypes() {
