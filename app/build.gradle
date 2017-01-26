@@ -25,6 +25,14 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:23.1.1'
-    testCompile 'junit:junit:4.12'
     compile 'com.google.code.gson:gson:2.8.0'
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.easymock:easymock:3.4'
+    testCompile 'org.powermock:powermock-easymock-release-full:1.6.4'
+    testCompile 'org.powermock:powermock-module-junit4:1.6.4'
+    testCompile 'org.powermock:powermock-module-junit4-rule-agent:1.6.4'
+    testCompile 'org.powermock:powermock-module-junit4-rule:1.6.4'
+    testCompile 'org.powermock:powermock:1.6.4'
+    testCompile 'org.powermock:powermock-api:1.6.4'
+    testCompile 'org.powermock:powermock-api-easymock:1.6.4'
 }

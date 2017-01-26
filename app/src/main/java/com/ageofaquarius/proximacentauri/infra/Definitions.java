@@ -2,7 +2,6 @@ package com.ageofaquarius.proximacentauri.infra;
 
 import android.content.Context;
 
-import com.ageofaquarius.proximacentauri.ServiceLocator;
 import com.ageofaquarius.proximacentauri.gaming.actions.Action;
 import com.ageofaquarius.proximacentauri.gaming.actions.DiplomacyAction;
 import com.ageofaquarius.proximacentauri.gaming.entity.City;
@@ -60,7 +59,7 @@ public class Definitions {
 
 
     public void load(DefinitionSchemas schemas) {
-        Context context = ServiceLocator.getAppContext();
+        Context context = null;// ServiceProvider.getAppContext();
         ArrayList<String> classNames = schemas.getClassNames();
         for (String className : classNames) {
             try {

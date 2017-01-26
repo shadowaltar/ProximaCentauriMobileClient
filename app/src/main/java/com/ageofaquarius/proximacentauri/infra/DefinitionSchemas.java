@@ -1,20 +1,21 @@
 package com.ageofaquarius.proximacentauri.infra;
 
 import com.ageofaquarius.proximacentauri.R;
-import com.ageofaquarius.proximacentauri.ServiceLocator;
 import com.ageofaquarius.proximacentauri.gaming.entity.ResourceType;
 import com.ageofaquarius.proximacentauri.gaming.entity.capabilities.Capability;
 import com.ageofaquarius.proximacentauri.gaming.faction.Faction;
+import com.ageofaquarius.proximacentauri.system.ServiceProvider;
 import com.ageofaquarius.proximacentauri.util.FileAccess;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+
 
 /**
  * Created by Mars on 2016-12-25.
@@ -52,7 +53,7 @@ public class DefinitionSchemas {
 
 
         for (Map.Entry<String, Class> entry : defaultClasses.entrySet()) {
-            String rawSchemas = FileAccess.readAsString(ServiceLocator.getAppContext(), R.raw.def_definition_schema);
+            String rawSchemas = FileAccess.readAsString(ServiceProvider.getInstance().getAppContext(), R.raw.def_definition_schema);
             parseSchemas(rawSchemas);
             classNames.add(entry.getKey());
             classes.add(entry.getValue());
@@ -74,10 +75,35 @@ public class DefinitionSchemas {
         }
     }
 
-    private void parseSchemas(String rawSchemas) {
-        JsonParser jsonParser = new JsonParser();
-        JsonObject jsonObject = (JsonObject) jsonParser.parse(rawSchemas);
-        JsonArray schemas = jsonObject.getAsJsonArray();
+    public HashMap<String, DefinitionSchema> parseSchemas(String rawSchemas) {
+        HashMap<String, DefinitionSchema> schemas = new HashMap<>();
+        try {
+            JsonParser jsonParser = new JsonParser();
+            JsonObject jsonObject = (JsonObject) jsonParser.parse(rawSchemas);
+            JsonArray schemaJsons = jsonObject.getAsJsonArray("SCHEMAS");
+            int count = schemaJsons.size();
+            for (int i = 0; i < count; i++) {
+                DefinitionSchema schema = new DefinitionSchema();
+                JsonObject schemaJson = (JsonObject) schemaJsons.get(i);
+                String type = schemaJson.get("TYPE").getAsString();
+                schema.setName(type);
+                schema.setGlobal(schemaJson.get("GLOBAL").getAsBoolean());
+                schema.setPredefined(schemaJson.get("PREDEFINED").getAsBoolean());
+
+                JsonArray columnJsons = schemaJson.getAsJsonArray("COLUMNS");
+                for (int j = 0; j < columnJsons.size(); j++) {
+                    Object object = columnJsons.get(j);
+                    if (object instanceof JsonNull)
+                        continue;
+                    JsonObject columnJson = (JsonObject) object;
+                    DefinitionColumn column = new DefinitionColumn();
+                    column.setHeader(columnJson.get("header").getAsString());
+                    column.setType(columnJson.get("type").getAsString());
+                    column.setFieldName(columnJson.get("fieldName").getAsString());
+                    schema.getColumns().put(column.getHeader(), column);
+                }
+                schemas.put(type,schema);
+            }
 //        for (int i = 0; i < rawSchemas.size(); i++) {
 //            String[] row = rawSchemas.get(i);
 //            String className = row[0];
@@ -92,7 +118,12 @@ public class DefinitionSchemas {
 //            def.put(subject, Arrays.copyOfRange(row, 2, row.length));
 //            definitionSchemas.put(className, def);
 //        }
-        System.out.println();
+
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return schemas;
     }
 
     public int getResourceKey(String className) {

@@ -1,4 +1,4 @@
-package com.ageofaquarius.proximacentauri;
+package com.ageofaquarius.proximacentauri.system;
 
 import static android.opengl.GLES20.*;
 import android.opengl.GLSurfaceView;

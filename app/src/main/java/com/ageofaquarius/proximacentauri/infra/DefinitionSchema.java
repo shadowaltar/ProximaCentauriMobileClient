@@ -7,7 +7,7 @@ import java.util.HashMap;
  */
 
 public class DefinitionSchema {
-    private String defaultClassName;
+    private String name;
     private boolean global;
     private boolean useSpecialClass;
     private boolean predefined;
@@ -22,12 +22,12 @@ public class DefinitionSchema {
         return otherSettings;
     }
 
-    public String getDefaultClassName() {
-        return defaultClassName;
+    public String getName() {
+        return name;
     }
 
-    public void setDefaultClassName(String defaultClassName) {
-        this.defaultClassName = defaultClassName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public boolean isGlobal() {
